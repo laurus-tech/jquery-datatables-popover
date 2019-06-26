@@ -1,0 +1,137 @@
+.table-popover {
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    background: transparent
+}
+
+.table-popover.fade {
+    display: none
+}
+
+.table-popover.fade.in {
+    display: block;
+}
+
+.table-popover-backdrop {
+    z-index: 1051;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.table-popover-content {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    left: 50%;
+    z-index: 1052;
+    padding: 15px 15px 40px;
+    box-sizing: border-box;
+}
+
+.table-popover th,
+.table-popover td {
+    text-align: center;
+    color: #333;
+}
+
+.table-popover tbody tr {
+    cursor: pointer;
+}
+
+.table-popover th {
+    font-size: 16px;
+}
+
+.table-popover td {
+    font-size: 14px
+}
+
+.table-popover tbody tr td:hover {
+    text-decoration: underline;
+}
+
+.table-popover [data-dismiss="table-popover"] {
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.table-popover-head {
+    padding: 0 20px 10px;
+    border-bottom: solid 1px #e5e5e5;
+}
+
+.table-popover-body {
+    padding: 20px;
+}
+
+.table-popover-title {
+    display: inline-block;
+    width: 70%;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.table-popover-title+[data-dismiss="table-popover"] {
+    width: 30%;
+    text-align: right;
+    display: inline-block;
+}
+
+
+/* TABLE STYLE */
+
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-popover th,
+.table-popover td {
+    padding: 10px;
+}
+
+.dataTables_scrollHead table {
+    background: #f5f8fa;
+    border-bottom: solid 1px #e6ecf0 !important;
+    border-top: solid 1px #879BB2;
+}
+
+.dataTables_scrollBody table.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.dataTables_scrollBody table.table-striped>tbody>tr {
+    transition: all ease-in-out .1s;
+    -webkit-transition: all ease-in-out .1s;
+    -moz-transition: all ease-in-out .1s;
+    -ms-transition: all ease-in-out .1s;
+    -o-transition: all ease-in-out .1s;
+}
+
+.dataTables_scrollBody table.table-striped>tbody>tr:hover {
+    background: #d9edf7
+}
+
+.dataTables_scrollBody table.table-bordered>tbody>tr>td {
+    border-top: solid 1px #e5e5e5;
+}
