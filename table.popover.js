@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: Estella
  * @Date: 2019-06-19 14:33:49
- * @LastEditTime: 2019-06-27 12:02:19
+ * @LastEditTime: 2019-06-27 14:10:35
  * @LastEditors: Please set LastEditors
  */
 
@@ -106,13 +106,13 @@ const TablePopover = function(args) {
         this._width = config.width ? config.width : DefaultConfig.width; // WIDTH
         this._height = config.height ? config.height : DefaultConfig.height; // MAX-HEIGHT
         this._config = config; // OPTIONS
-        this._columns = config.columns || DefaultConfig.columns; // TABLE COLUMNS
-        this._data = config.data || DefaultConfig.data; // TABLE COLUMNS DATA
+        this._columns = config.columns ? config.columns : DefaultConfig.columns; // TABLE COLUMNS
+        this._data = config.data ? config.data : DefaultConfig.data; // TABLE COLUMNS DATA
         // this._dataId = config['data-id']; // TABLE ROW ID
-        this._rowIndex = config.rowIndex || DefaultConfig.rowIndex;
+        this._rowIndex = config.hasOwnProperty('rowIndex') ? config.rowIndex : DefaultConfig.rowIndex;
         this._tableStyle = config.tableStyle && typeof(config.tableStyle) == 'string' ? config.tableStyle : DefaultConfig.tableStyle;
-        this._paging = config.paging ? config.paging : DefaultConfig.paging;
-        this._chosenClose = config.chosenClose ? config.chosenClose : DefaultConfig.chosenClose;
+        // this._paging = config.paging ? config.paging : DefaultConfig.paging;
+        this._chosenClose = config.hasOwnProperty('chosenClose') ? config.chosenClose : DefaultConfig.chosenClose;
         // this._paging = config.paging.enable ? config.paging : DefaultConfig.paging;
         // this.template = 
     }
@@ -126,7 +126,6 @@ const TablePopover = function(args) {
         if (this._isShown) {
             return;
         }
-
 
         this._isShown = true;
         node.addClass(CLASSNAME.SHOW);
@@ -225,8 +224,8 @@ const TablePopover = function(args) {
     TablePopover._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
         return this.each(function() {
             var data = $(this).data(DATA_KEY);
-
             var _config = _objectSpread({}, DefaultConfig, $(this).data(), typeof config === 'object' && config ? config : relatedTarget);
+
             if (!data) {
                 data = new TablePopover(this, _config);
                 $(this).data(DATA_KEY, data);
