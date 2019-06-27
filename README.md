@@ -108,7 +108,6 @@ $("#popover").tablePopover('hide');
 | rowIndex  | Boolean | 否| false | 是否显示序号列  |
 | tableStyle  | String | 否| table-bordered | 控制表格样式 <br> 可选项: table-bordered ; table-table-striped |
 | chosenClose  | Boolean | 否| true | 选择表格行后关闭弹出框  |
-||
 
 ### 事件函数
 提供了一些事件函数，可供使用
@@ -118,7 +117,6 @@ $("#popover").tablePopover('hide');
 |tp.shown| 弹出框显示出来之后被触发|
 |tp.hidden| 弹出框被隐藏之后被触发|
 |tp.row-selected | 选择表格数据后被触发|
-||
 
 
 ## 例子
