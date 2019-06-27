@@ -12,49 +12,47 @@
 <body>
     <button onclick="showPopover1()">show popover1</button>
     <button onclick="showPopover2()">show popover2</button>
-    <div id="test" class="table-popover fade"></div>
+    <button onclick="$('#test2').tablePopover('show');">only show</button>
+    <button onclick="$('#test2').tablePopover('hide');">only hide</button>
+    <div id="test1" class="table-popover fade"></div>
+    <div id="test2" class="table-popover fade"></div>
     <script src="./lib/jquery.min.js"></script>
     <script src="./lib/jquery.dataTables.min.js"></script>
     <script src="./table.popover.js"></script>
     <script>
         const columns = [{
-            data: 'index',
-            title: '序号',
+            data: "name",
+            title: "名字"
         }, {
-            data: 'nr',
-            title: '编码'
+            data: "gender",
+            title: "性别"
         }];
+
         const data = [{
-            index: 1,
-            nr: 'A'
+            name: "张三",
+            gender: "男"
         }, {
-            index: 2,
-            nr: 'B'
+            name: "西施",
+            gender: "女"
         }];
 
         const data1 = [{
-            index: 1,
-            nr: 'C'
+            name: "张三",
+            gender: "男"
         }, {
-            index: 2,
-            nr: 'D'
+            name: "西施",
+            gender: "女"
         }, {
-            index: 3,
-            nr: 'E'
-        }]
+            name: "如花",
+            gender: "女"
+        }];
 
         function showPopover1() {
-            $('#test').tablePopover({
-                columns: columns,
-                data: data,
-                width: 800,
-                height: 500,
-                rowIndex: false
-            });
+            $('#test1').tablePopover('show');
         }
 
         function showPopover2() {
-            $('#test').tablePopover({
+            $('#test2').tablePopover({
                 columns: columns,
                 data: data1,
                 width: 800,
@@ -62,23 +60,19 @@
                 rowIndex: true,
                 tableStyle: 'table-striped table-bordered',
                 title: '明细表',
-                chosenClose: true,
-                // paging: {
-                //     enable: true,
-                //     length: 1
-                // }
+                chosenClose: true
             });
         }
 
-        $('#test').on('tp.shown', function() {
+        $('#test2').on('tp.shown', function() {
             console.log('shown')
         });
 
-        $('#test').on('tp.row-selected', function(e, rowData) {
+        $('#test2').on('tp.row-selected', function(e, rowData) {
             console.log(rowData)
         });
 
-        $('#test').on('tp.hidden', function(e, rowData) {
+        $('#test2').on('tp.hidden', function(e, rowData) {
             console.log('hidden')
         })
     </script>

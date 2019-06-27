@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: Estella
  * @Date: 2019-06-19 14:33:49
- * @LastEditTime: 2019-06-26 18:58:16
+ * @LastEditTime: 2019-06-27 12:02:19
  * @LastEditors: Please set LastEditors
  */
 
@@ -22,7 +22,9 @@ const CLASSNAME = {
     BODY: CLASSPREFIX + '-body',
     HEAD: CLASSPREFIX + '-head',
     TITLE: CLASSPREFIX + '-title',
-    BACKDROP: CLASSPREFIX + '-backdrop'
+    BACKDROP: CLASSPREFIX + '-backdrop',
+    TABLEFAILED: CLASSPREFIX + '-failed',
+    TABLEEMPTY: CLASSPREFIX + '-empty'
 };
 
 const IDNAME = {
@@ -119,7 +121,6 @@ const TablePopover = function(args) {
     // api - show
     _proto.show = function(relatedTarget) {
         const _this = this;
-
         const node = $(this._element);
         // if it's already shown, return
         if (this._isShown) {
@@ -131,20 +132,28 @@ const TablePopover = function(args) {
         node.addClass(CLASSNAME.SHOW);
         node.html(this.handleTemplate());
 
-        const table = $('#' + IDNAME.TABLE).DataTable({
-            lengthChange: false,
-            searching: false,
-            ordering: false,
-            info: false,
-            paging: false,
-            scrollY: this.height / 2,
-            scrollX: true,
-            columns: _this._columns,
-            data: _this._data,
-            // paging: this._paging.enable,
-            // pageLength: this._paging.length,
-            destroy: true
-        });
+        if ($('#' + this._element.id + '_' + IDNAME.TABLE)) {
+            const table = $('#' + this._element.id + '_' + IDNAME.TABLE).DataTable({
+                lengthChange: false,
+                searching: false,
+                ordering: false,
+                info: false,
+                paging: false,
+                scrollY: this.height / 2,
+                scrollX: true,
+                columns: this.handleColumns(),
+                data: this.handleData(),
+                // paging: this._paging.enable,
+                // pageLength: this._paging.length,
+                destroy: true
+            });
+
+            table.on('click', 'tr', function() {
+                const rowSelectEvent = $.Event(Event.ROWSELECTED);
+                node.trigger(rowSelectEvent, table.row(this).data());
+                _this._chosenClose ? _this.hide() : null;
+            });
+        }
 
         node.on('click', Selector.BACKDROP, function(event) {
             // BACKDROP
@@ -156,11 +165,6 @@ const TablePopover = function(args) {
             return _this.hide(event);
         });
 
-        table.on('click', 'tr', function() {
-            const rowSelectEvent = $.Event(Event.ROWSELECTED);
-            node.trigger(rowSelectEvent, table.row(this).data());
-            _this._chosenClose ? _this.hide() : null;
-        });
 
         const shownEvent = $.Event(Event.SHOWN);
         setTimeout(function() {
@@ -170,9 +174,9 @@ const TablePopover = function(args) {
 
     _proto.hide = function() {
         const node = $(this._element);
-        $('#' + IDNAME.TABLE).DataTable().destroy().clear();
+        // $('#' + IDNAME.TABLE).DataTable().destroy().clear();
         node.removeClass(CLASSNAME.SHOW);
-        node.html('');
+        // node.html('');
         node.unbind('click');
         this._isShown = false;
         const hiddenEvent = $.Event(Event.HIDDEN);
@@ -182,28 +186,56 @@ const TablePopover = function(args) {
     }
 
     _proto.handleTemplate = function() {
-        const template = '<div class="' + CLASSNAME.CONTENT + '" style="max-height: ' + this._height + 'px;width: ' + this._width + 'px">' +
+        let template = '<div class="' + CLASSNAME.CONTENT + '" style="max-height: ' + this._height + 'px;width: ' + this._width + 'px">' +
             '<div class="' + CLASSNAME.HEAD + '"><h4 class="' + CLASSNAME.TITLE + '">' + this._title + '</h4><a data-dismiss="' + CLASSPREFIX + '">×</a></div>' +
-            '<div class="' + CLASSNAME.BODY + '"><table width="100%" id="' + IDNAME.TABLE + '" class="' + (this._tableStyle ? this._tableStyle : '') + '"></table></div>' +
-            '</div><div class="table-popover-backdrop"></div>';
+            '<div class="' + CLASSNAME.BODY + '">';
+
+        if (this._columns.length) {
+            template += '<table width="100%" id="' + this._element.id + '_' + IDNAME.TABLE + '" class="' + (this._tableStyle ? this._tableStyle : '') + '"></table></div>' +
+                '</div><div class="table-popover-backdrop"></div>';
+        } else {
+            template += '<p class="' + CLASSNAME.TABLEFAILED + '">表格创建失败</p></div></div><div class="table-popover-backdrop"></div>';
+        }
+
         return template;
+    }
+
+    _proto.handleColumns = function() {
+        let columns = JSON.parse(JSON.stringify(this._columns));
+        if (this._rowIndex) {
+            columns.unshift({ title: '序号', data: 'tp_index' });
+            return columns;
+        }
+        return columns;
+    }
+
+    _proto.handleData = function() {
+        if (this._rowIndex) {
+            let data = [];
+            this._data.map((rowdata, index) => {
+                let rowData = JSON.parse(JSON.stringify(rowdata));
+                rowData['tp_index'] = index + 1;
+                data.push(rowData);
+            })
+            return data;
+        }
+        return this._data;
     }
 
     TablePopover._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
         return this.each(function() {
             var data = $(this).data(DATA_KEY);
 
-            var _config = _objectSpread({}, DefaultConfig, $(this).data(), typeof config === 'object' && config ? config : {});
-            // if (!data) {
-            data = new TablePopover(this, _config);
-            $(this).data(DATA_KEY, data);
-            // }
+            var _config = _objectSpread({}, DefaultConfig, $(this).data(), typeof config === 'object' && config ? config : relatedTarget);
+            if (!data) {
+                data = new TablePopover(this, _config);
+                $(this).data(DATA_KEY, data);
+            }
 
             if (typeof config === 'string') {
                 if (typeof data[config] === 'undefined') {
                     throw new TypeError("No method named \"" + config + "\"");
                 }
-
                 data[config](relatedTarget);
             } else if (!_config.show) {
                 data.show(relatedTarget);
