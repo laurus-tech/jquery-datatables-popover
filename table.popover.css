@@ -41,6 +41,7 @@
     z-index: 1052;
     padding: 15px 15px 40px;
     box-sizing: border-box;
+    background: #fff;
 }
 
 .table-popover th,
