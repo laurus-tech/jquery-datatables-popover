@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./editormd.min.css">
+    <link rel="stylesheet" href="../table.popover.css" type="text/css">
+    <title>Jquery-Datatables-Popover</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            color: #333;
+            width: 70%;
+            margin: 0 auto;
+        }
+        
+        header {
+            height: 200px;
+        }
+        
+        header img.logo {
+            height: 80%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            display: block;
+        }
+
+        h1 a {
+            color: #333;
+            text-decoration: none
+        }
+        
+        section {
+            display: block
+        }
+        
+        .editormd-preview {
+            position: unset;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .example .example-content {
+            background: #f5f5f5;
+            border: solid 1px #ddd;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        
+        .example3 .example-content,
+        .example1 .example-content {
+            position: relative;
+            height: 400px;
+        }
+        
+        .example3 .example-content .table-popover,
+        .example1 .example-content .table-popover {
+            position: absolute;
+        }
+        
+        .example3 .example-content .table-popover-backdrop,
+        .example1 .example-content .table-popover-backdrop {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="../assets/logo.png" alt="Jquery-Datatables-Popover" class="logo">
+        <h1><a href="https://github.com/laurus-tech/jquery-datatables-popover" target="_blank">表格弹出框组件</a></h1>
+    </header>
+    <section>
+        <h2>依赖</h2>
+        <div class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 0;"><pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="lang-html"><span class="com">&lt;!-- css --&gt;</span></code></li><li class="L1"><code class="lang-html"><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"css/table.popover.css"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text/css"</span><span class="pln"> </span><span class="tag">/&gt;</span></code></li><li class="L2"><code class="lang-html"></code></li><li class="L3"><code class="lang-html"><span class="com">&lt;!-- js --&gt;</span></code></li><li class="L4"><code class="lang-html"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"lib/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></li><li class="L5"><code class="lang-html"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"lib/jquery.dataTables.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></li><li class="L6"><code class="lang-html"><span class="com">&lt;!-- first jquery, second datatables, third tablePopover --&gt;</span></code></li><li class="L7"><code class="lang-html"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"lib/table.popover.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></li></ol></pre>
+        </div>
+    </section>
+    <section>
+        <h2>例子</h2>
+        <ol>
+            <li class="example example1">
+                <h3>静态实例</h3>
+                <div class="example-content">
+                    <div class="table-popover fade in">
+                        <div class="table-popover-content" style="max-height: 400px;width: 600px">
+                            <div class="table-popover-head">
+                                <h4 class="table-popover-title"></h4><a data-dismiss="table-popover">×</a></div>
+                            <div class="table-popover-body">
+                                <div class="dataTables_wrapper no-footer">
+                                    <div class="dataTables_scroll">
+                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 530px; padding-right: 0px;">
+                                                <table width="100%" class="table-bordered dataTable no-footer" role="grid" style="margin-left: 0px; width: 530px;">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 245px;">名字</th>
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 245px;">性别</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+                                            <table width="100%" class="table-bordered dataTable no-footer" role="grid" style="width: 100%;">
+                                                <thead>
+                                                    <tr role="row" style="height: 0px;">
+                                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 245px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                                            <div class="dataTables_sizing" style="height:0;overflow:hidden;">名字</div>
+                                                        </th>
+                                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 245px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                                            <div class="dataTables_sizing" style="height:0;overflow:hidden;">性别</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr role="row" class="odd">
+                                                        <td>张三</td>
+                                                        <td>男</td>
+                                                    </tr>
+                                                    <tr role="row" class="even">
+                                                        <td>西施</td>
+                                                        <td>女</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-popover-backdrop"></div>
+                    </div>
+                </div>
+                <div class="example-code">
+                    <div class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 0;"><pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="lang-html"><span class="com">&lt;!-- html --&gt;</span></code></li><li class="L1"><code class="lang-html"><span class="com">&lt;!-- a container with classname table-popover fade --&gt;</span></code></li><li class="L2"><code class="lang-html"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"popover"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"table-popover fade"</span><span class="tag">&gt;&lt;/div&gt;</span></code></li></ol></pre>
+                    </div>
+                </div>
+            </li>
+            <li class="example">
+                <h3>无配置动态示例</h3>
+                <p>利用行选择事件(tp.row-selected)来获取表格选中的项</p>
+                <p>更多事件函数见<a href="https://github.com/laurus-tech/jquery-datatables-popover#%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0">文档</a></p>
+                <div class="example-content">
+                    <div style="margin: 40px 0 0 40px">
+                        <button onclick="showExample2()">点击弹出</button>
+                        <p id="example2-selected"></p>
+                    </div>
+                    <div id="example2" class="table-popover fade"></div>
+                </div>
+                <div class="example-code">
+                    <div class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 0;"><pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="lang-html"><span class="com">&lt;!-- html --&gt;</span></code></li><li class="L1"><code class="lang-html"><span class="com">&lt;!-- a container with classname table-popover fade --&gt;</span></code></li><li class="L2"><code class="lang-html"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"example2"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"table-popover fade"</span><span class="tag">&gt;&lt;/div&gt;</span></code></li><li class="L3"><code class="lang-html"><span class="com">&lt;!-- js --&gt;</span></code></li><li class="L4"><code class="lang-html"><span class="tag">&lt;script&gt;</span></code></li><li class="L5"><code class="lang-html"><span class="pln">  </span><span class="kwd">const</span><span class="pln"> columns </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[{</span><span class="pln">data</span><span class="pun">:</span><span class="pln"> </span><span class="str">"name"</span><span class="pun">,</span><span class="pln">title</span><span class="pun">:</span><span class="pln"> </span><span class="str">"名字"</span><span class="pun">},{</span><span class="pln">data</span><span class="pun">:</span><span class="pln"> </span><span class="str">"gender"</span><span class="pun">,</span><span class="pln">title</span><span class="pun">:</span><span class="pln"> </span><span class="str">"性别"</span><span class="pun">}];</span></code></li><li class="L6"><code class="lang-html"><span class="pln">  </span><span class="kwd">const</span><span class="pln"> data </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[{</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"张三"</span><span class="pun">,</span><span class="pln">gender</span><span class="pun">:</span><span class="pln"> </span><span class="str">"男"</span><span class="pun">},{</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"西施"</span><span class="pun">,</span><span class="pln">gender</span><span class="pun">:</span><span class="pln"> </span><span class="str">"女"</span><span class="pun">}];</span></code></li><li class="L7"><code class="lang-html"></code></li><li class="L8"><code class="lang-html"><span class="pln">    $</span><span class="pun">(</span><span class="str">"#example2"</span><span class="pun">).</span><span class="pln">tablePopover</span><span class="pun">({</span></code></li><li class="L9"><code class="lang-html"><span class="pln">            columns</span><span class="pun">:</span><span class="pln"> columns</span><span class="pun">,</span></code></li><li class="L0"><code class="lang-html"><span class="pln">            data</span><span class="pun">:</span><span class="pln"> data</span></code></li><li class="L1"><code class="lang-html"><span class="pln">    </span><span class="pun">});</span></code></li><li class="L2"><code class="lang-html"></code></li><li class="L3"><code class="lang-html"><span class="pln">    $</span><span class="pun">(</span><span class="str">'#example2'</span><span class="pun">).</span><span class="pln">on</span><span class="pun">(</span><span class="str">'tp.row-selected'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">,</span><span class="pln"> rowData</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></code></li><li class="L4"><code class="lang-html"><span class="pln">        $</span><span class="pun">(</span><span class="str">'#example2-selected'</span><span class="pun">).</span></code></li><li class="L5"><code class="lang-html"><span class="pln">        html</span><span class="pun">(</span><span class="str">"选择的是：&lt;br&gt;姓名："</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> rowData</span><span class="pun">.</span><span class="pln">name </span><span class="pun">+</span><span class="pln"> </span><span class="str">'，性别：'</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> rowData</span><span class="pun">.</span><span class="pln">gender</span><span class="pun">);</span></code></li><li class="L6"><code class="lang-html"><span class="pln">    </span><span class="pun">});</span></code></li><li class="L7"><code class="lang-html"><span class="tag">&lt;/script&gt;</span></code></li></ol></pre>
+                    </div>
+                </div>
+            </li>
+            <li class="example example3">
+                <h3>表格带序号(options: rowIndex)</h3>
+                <p>更多可配置项见<a href="https://github.com/laurus-tech/jquery-datatables-popover#%E5%8F%AF%E9%85%8D%E7%BD%AE%E9%A1%B9">文档</a></p>
+                <div class="example-content">
+                    <div class="table-popover fade in">
+                        <div class="table-popover-content" style="max-height: 400px;width: 600px">
+                            <div class="table-popover-head">
+                                <h4 class="table-popover-title"></h4><a data-dismiss="table-popover">×</a></div>
+                            <div class="table-popover-body">
+                                <div class="dataTables_wrapper no-footer">
+                                    <div class="dataTables_scroll">
+                                        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                                            <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 530px; padding-right: 0px;">
+                                                <table width="100%" class="table-bordered dataTable no-footer" role="grid" style="margin-left: 0px; width: 530px;">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 156px;">序号</th>
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 157px;">名字</th>
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 157px;">性别</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+                                            <table width="100%" id="test2_tp_table" class="table-bordered dataTable no-footer" role="grid" style="width: 100%;">
+                                                <thead>
+                                                    <tr role="row" style="height: 0px;">
+                                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 156px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                                            <div class="dataTables_sizing" style="height:0;overflow:hidden;">序号</div>
+                                                        </th>
+                                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 157px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                                            <div class="dataTables_sizing" style="height:0;overflow:hidden;">名字</div>
+                                                        </th>
+                                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 157px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                                            <div class="dataTables_sizing" style="height:0;overflow:hidden;">性别</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr role="row" class="odd">
+                                                        <td>1</td>
+                                                        <td>张三</td>
+                                                        <td>男</td>
+                                                    </tr>
+                                                    <tr role="row" class="even">
+                                                        <td>2</td>
+                                                        <td>西施</td>
+                                                        <td>女</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-popover-backdrop"></div>
+                    </div>
+                </div>
+                <div class="example-code">
+                    <div class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 0;"><pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="lang-html"><span class="com">&lt;!-- html --&gt;</span></code></li><li class="L1"><code class="lang-html"><span class="com">&lt;!-- a container with classname table-popover fade --&gt;</span></code></li><li class="L2"><code class="lang-html"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"example3"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"table-popover fade"</span><span class="tag">&gt;&lt;/div&gt;</span></code></li><li class="L3"><code class="lang-html"><span class="com">&lt;!-- js --&gt;</span></code></li><li class="L4"><code class="lang-html"><span class="tag">&lt;script&gt;</span></code></li><li class="L5"><code class="lang-html"><span class="pln">  </span><span class="kwd">const</span><span class="pln"> columns </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[{</span><span class="pln">data</span><span class="pun">:</span><span class="pln"> </span><span class="str">"name"</span><span class="pun">,</span><span class="pln">title</span><span class="pun">:</span><span class="pln"> </span><span class="str">"名字"</span><span class="pun">},{</span><span class="pln">data</span><span class="pun">:</span><span class="pln"> </span><span class="str">"gender"</span><span class="pun">,</span><span class="pln">title</span><span class="pun">:</span><span class="pln"> </span><span class="str">"性别"</span><span class="pun">}];</span></code></li><li class="L6"><code class="lang-html"><span class="pln">  </span><span class="kwd">const</span><span class="pln"> data </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[{</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"张三"</span><span class="pun">,</span><span class="pln">gender</span><span class="pun">:</span><span class="pln"> </span><span class="str">"男"</span><span class="pun">},{</span><span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">"西施"</span><span class="pun">,</span><span class="pln">gender</span><span class="pun">:</span><span class="pln"> </span><span class="str">"女"</span><span class="pun">}];</span></code></li><li class="L7"><code class="lang-html"></code></li><li class="L8"><code class="lang-html"><span class="pln">  $</span><span class="pun">(</span><span class="str">"#example3"</span><span class="pun">).</span><span class="pln">tablePopover</span><span class="pun">({</span></code></li><li class="L9"><code class="lang-html"><span class="pln">    columns</span><span class="pun">:</span><span class="pln"> columns</span><span class="pun">,</span></code></li><li class="L0"><code class="lang-html"><span class="pln">    data</span><span class="pun">:</span><span class="pln"> data</span><span class="pun">,</span></code></li><li class="L1"><code class="lang-html"><span class="pln">    rowIndex</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span></code></li><li class="L2"><code class="lang-html"><span class="pln">  </span><span class="pun">});</span></code></li><li class="L3"><code class="lang-html"><span class="tag">&lt;/script&gt;</span></code></li></ol></pre>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </section>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/jquery.dataTables.min.js"></script>
+    <script src="../table.popover.js"></script>
+    <script>
+        const columns = [{
+            data: "name",
+            title: "名字"
+        }, {
+            data: "gender",
+            title: "性别"
+        }];
+
+        const data = [{
+            name: "张三",
+            gender: "男"
+        }, {
+            name: "西施",
+            gender: "女"
+        }];
+
+        function showExample2() {
+            $('#example2').tablePopover({
+                columns: columns,
+                data: data,
+            });
+        }
+
+        $('#example2').on('tp.row-selected', function(e, rowData) {
+            $('#example2-selected').html("选择的是：<br>姓名：" + rowData.name + '，性别：' + rowData.gender);
+        });
+    </script>
+</body>
+
+</html>

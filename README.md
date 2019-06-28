@@ -115,7 +115,7 @@ $("#popover").tablePopover('hide');
 提供了一些事件函数，可供使用
 
 |   事件类型    |   描述   |
-|  :----   | :----:  |
+|  :----   | :----  |
 |tp.shown| 弹出框显示出来之后被触发|
 |tp.hidden| 弹出框被隐藏之后被触发|
 |tp.row-selected | 选择表格数据后被触发|
@@ -123,4 +123,4 @@ $("#popover").tablePopover('hide');
 
 ## 例子
 
-见demo下的example.html
+见demo目录下的example.html
