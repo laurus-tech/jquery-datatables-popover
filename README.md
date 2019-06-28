@@ -13,6 +13,8 @@
 
 ## 简介
 
+![Jquery-Datatables-Popover](https://github.com/laurus-tech/jquery-datatables-popover/blob/master/assets/example.gif?raw=true)
+
 - 一个弹出框组件，可以弹出表格信息以辅助选择
 - 表格借助 datatables，基于 Jquery 拓展
 - 还有更多功能待完善
@@ -121,4 +123,4 @@ $("#popover").tablePopover('hide');
 
 ## 例子
 
-见example.html
+见demo下的example.html
